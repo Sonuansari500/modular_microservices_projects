@@ -24,7 +24,7 @@ public class OrderService {
 	private OrderRepository orderRepositoryl;
 	
 	@Autowired
-	private WebClient webClient;
+	private WebClient.Builder webClient;
 	
 	public void placeOrder(OrderRequest request)
 	{
@@ -35,7 +35,7 @@ public class OrderService {
 		order.setOrderLineItemList(list);
 		List<String> skuCodes = order.getOrderLineItemList().stream().map(orderLineiItem->orderLineiItem.getSkuCode()).toList();
 		// call inventory service and place order if it is in stock
-		InventoryResponse[] inventoryResponse = webClient.get().uri("http://localhost:8090/api/inventory",uriBuilder->uriBuilder.queryParam("skuCode", skuCodes).build()).retrieve()
+		InventoryResponse[] inventoryResponse = webClient.build().get().uri("http://inventory-service/api/inventory",uriBuilder->uriBuilder.queryParam("skuCode", skuCodes).build()).retrieve()
 		.bodyToMono(InventoryResponse[].class).block();
 		Arrays.stream(inventoryResponse).forEach(item->System.out.print(item));
 		if (inventoryResponse.length < 1) {
