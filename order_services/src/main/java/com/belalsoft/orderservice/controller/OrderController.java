@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.belalsoft.orderservice.dto.OrderRequest;
 import com.belalsoft.orderservice.service.OrderService;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/order")
+@Slf4j
 public class OrderController {
 	
 	@Autowired
@@ -22,6 +26,7 @@ public class OrderController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public String placeOrder(@RequestBody OrderRequest request) {
 		orderService.placeOrder(request);
+		log.info("Order is placed");
 		return "Order is placed successfully !";
 		
 		

@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "c5515748-6fcd-4b7e-99c4-cac6f4879567",
+		"name": "Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8986405"
+	},
+	"item": [
+		{
+			"name": "orderServices",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderLineItemDtoList\" : [{\r\n        \"skuCode\":\"c\",\r\n        \"price\" : 120,\r\n        \"quantity\" : 10\r\n    },\r\n    {\r\n        \"skuCode\":\"d\",\r\n        \"price\" : 120,\r\n        \"quantity\" : 10\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8089/api/order"
+			},
+			"response": []
+		},
+		{
+			"name": "inventoryServices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/inventory?skuCode=iphone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"inventory"
+					],
+					"query": [
+						{
+							"key": "skuCode",
+							"value": "iphone"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
